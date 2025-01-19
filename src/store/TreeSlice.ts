@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { fetchTreeItems } from '../repositories/TreeRepository';
 
-import type { Asset, TreeState } from '../types';
+import type { Item, TreeState } from '../types';
 
 const initialState: TreeState['tree'] = {
   items: null,
@@ -13,7 +13,9 @@ export const fetchTreeItemsThunk = createAsyncThunk(
   'tree/fetchTreeItems',
   async (mainId: string, { rejectWithValue }) => {
     try {
-      return await fetchTreeItems(mainId);
+      const data = await fetchTreeItems(mainId);
+      console.log(data)
+      return data;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -33,7 +35,7 @@ const treeSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchTreeItemsThunk.fulfilled, (state, action: PayloadAction<Asset[]>) => {
+      .addCase(fetchTreeItemsThunk.fulfilled, (state, action: PayloadAction<Item[]>) => {
         state.isLoading = false;
         state.items = action.payload;
       })

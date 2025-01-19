@@ -22,16 +22,37 @@ export type Asset = {
     name: string,
     parentId: string | null,
     sensorId: string,
-    sensorType: string,
-    status: string,
+    sensorType?: string,
+    status?: string,
     gatewayId: string,
     locationId: string | null
+    children?: Asset[]
 }
 
 export interface TreeState {
     tree: {
-        items: Asset[] | null;
+        items: Item | null;
         isLoading: boolean;
         error: string | null;
     }
+}
+
+export interface Item {
+    assets: Asset[]
+    locations: Location[]
+}
+  
+export interface TreeNodeProps {
+    id: string;
+    label: string;
+    name?: string;
+    sensorType?: string;
+    status?: string;
+    children?: TreeNodeProps[];
+}
+  
+export interface Filters {
+    text?: string;
+    energy?: boolean
+    critical?: boolean
 }
