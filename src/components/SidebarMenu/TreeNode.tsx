@@ -1,17 +1,18 @@
 import React, { useState } from "react";
+import { useFilters } from "../../context/Filters/FiltersContext";
 
-import type { Filters, TreeNodeProps } from "../../types";
+import type { TreeNodeProps } from "../../types";
   
-  const TreeNode: React.FC<{ item: TreeNodeProps; filters: Filters }> = ({
-    item,
-    filters,
-  }) => {
+const TreeNode: React.FC<{ item: TreeNodeProps }> = ({
+  item
+}) => {
   const [expanded, setExpanded] = useState(false);
+  const { filters } = useFilters();
 
   const matchesFilters = () => {
     if (filters.text && !item.label.toLowerCase().includes(filters.text.toLowerCase())) {
-        return false;
-      }
+      return false;
+    }
 
     return true;
   };
@@ -26,7 +27,7 @@ import type { Filters, TreeNodeProps } from "../../types";
       {expanded && item.children && (
         <div style={{ paddingLeft: "20px" }}>
           {item.children.map((child) => (
-            <TreeNode key={child.id} item={child} filters={filters} />
+            <TreeNode key={child.id} item={child} />
           ))}
         </div>
       )}

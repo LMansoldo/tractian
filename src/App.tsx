@@ -5,10 +5,9 @@ import './App.css'
 function App() {
 
   return (
-    <>
-      <MainLayout />
+    <MainLayout>
       <TreeView />
-    </>
+    </MainLayout>
   )
 }
 

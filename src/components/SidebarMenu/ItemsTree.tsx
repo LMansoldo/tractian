@@ -1,20 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import TreeNode from "./TreeNode";
 
-import type { Item, Filters, TreeNodeProps } from "../../types";
+import type { Item, TreeNodeProps } from "../../types";
 
 const ItemTree: React.FC<{ items: Item }> = ({ items }) => {
-  const [filters, setFilters] = useState<Filters>({
-    text: "",
-    energy: false,
-    critical: false,
-  });
-
-
-  const applyFilter = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterType: keyof Filters) => {
-    setFilters({ ...filters, [filterType]: e.target.value });
-  };
-
   const organizeTree = ({ assets, locations }: Item): TreeNodeProps[] => {
     const map = new Map<string, TreeNodeProps>();
   
@@ -69,21 +58,11 @@ const ItemTree: React.FC<{ items: Item }> = ({ items }) => {
   const organizedItems = organizeTree(items);
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          placeholder="Search by name"
-          onChange={(e) => applyFilter(e, "text")}
-        />
-
-      </div>
-      <div>
+    <>
         {organizedItems.map((item) => (
-          <TreeNode key={item.id} item={item} filters={filters} />
+          <TreeNode key={item.id} item={item} />
         ))}
-      </div>
-    </div>
+    </>
   );
 };
 

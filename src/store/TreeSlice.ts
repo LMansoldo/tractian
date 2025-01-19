@@ -14,7 +14,7 @@ export const fetchTreeItemsThunk = createAsyncThunk(
   async (mainId: string, { rejectWithValue }) => {
     try {
       const data = await fetchTreeItems(mainId);
-      console.log(data)
+
       return data;
     } catch (error) {
       if (error instanceof Error) {
@@ -35,7 +35,7 @@ const treeSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchTreeItemsThunk.fulfilled, (state, action: PayloadAction<Item[]>) => {
+      .addCase(fetchTreeItemsThunk.fulfilled, (state, action: PayloadAction<Item>) => {
         state.isLoading = false;
         state.items = action.payload;
       })
