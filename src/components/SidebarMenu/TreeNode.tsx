@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useFilters } from '@context'
+import { AssetIcon, ComponentIcon, LocationIcon, ChevronDownIcon } from '@assets'
 
 import type { TreeNodeProps } from '@types'
 
@@ -20,6 +21,16 @@ const TreeNode: React.FC<{ item: TreeNodeProps }> = ({ item }) => {
 
 	if (!matchesFilters()) return null
 
+
+
+	const getIcon = () => {
+		if (item.isLocation || item.isSubLocation) return <LocationIcon />
+		if (item.isAsset && item.children.length) return <AssetIcon />
+		return <ComponentIcon />
+	}
+
+	const ChevronIcon = () => expanded && item.children.length ? <ChevronDownIcon /> : ''
+
 	const getClassName = () => {
 		return item.isLocation ||
 			item.isSubLocation ||
@@ -31,9 +42,13 @@ const TreeNode: React.FC<{ item: TreeNodeProps }> = ({ item }) => {
 	}
 
 	return (
-		<li className="flex flex-col items-start">
-			<button onClick={() => setExpanded(!expanded)}>{item.label}</button>
-			<ul className={`${getClassName()}`}>
+		<li className="flex flex-col items-start w-full">
+			<button onClick={() => setExpanded(!expanded)} className="flex gap-2 p-1 items-center">
+				{ChevronIcon()}
+				{getIcon()}
+				{item.label}
+			</button>
+			<ul className={`${getClassName()} overflow-hidden transition-all duration-1000 ease-in-out max-h-0 ${expanded ? 'max-h-screen' : ''} w-full`}>
 				{expanded && item.children && (
 					<>
 						{item.children.map((child) => (
