@@ -1,44 +1,49 @@
-import React, { useState } from "react";
-import { useFilters } from "../../context/Filters/FiltersContext";
+import React, { useState } from 'react'
+import { useFilters } from '@context'
 
-import type { TreeNodeProps } from "../../types";
-  
-const TreeNode: React.FC<{ item: TreeNodeProps }> = ({
-  item
-}) => {
-  const [expanded, setExpanded] = useState(false);
-  const { filters } = useFilters();
+import type { TreeNodeProps } from '@types'
 
-  const matchesFilters = () => {
-    if (filters.text && !item.label.toLowerCase().includes(filters.text.toLowerCase())) {
-      return false;
-    }
+const TreeNode: React.FC<{ item: TreeNodeProps }> = ({ item }) => {
+	const [expanded, setExpanded] = useState(false)
+	const { filters } = useFilters()
 
-    return true;
-  };
+	const matchesFilters = () => {
+		if (
+			filters.text &&
+			!item.label.toLowerCase().includes(filters.text.toLowerCase())
+		) {
+			return false
+		}
 
-  if (!matchesFilters()) return null;
+		return true
+	}
 
-  const getClassName = () => {
-    return item.isLocation || item.isSubLocation || item.isAsset || item.isSubAsset || item.isComponent
-      ? "left-9 relative"
-      : "";
-  };
+	if (!matchesFilters()) return null
 
-  return (
-    <li className="flex flex-col items-start">
-      <button onClick={() => setExpanded(!expanded)}>{item.label}</button>
-      <ul className={`${getClassName()}`}>
-        {expanded && item.children && (
-          <>
-            {item.children.map((child) => (
-              <TreeNode key={child.id} item={child} />
-            ))}
-          </>
-        )}
-      </ul>
-    </li>
-  );
-};
+	const getClassName = () => {
+		return item.isLocation ||
+			item.isSubLocation ||
+			item.isAsset ||
+			item.isSubAsset ||
+			item.isComponent
+			? 'left-9 relative'
+			: ''
+	}
 
-export default TreeNode;
+	return (
+		<li className="flex flex-col items-start">
+			<button onClick={() => setExpanded(!expanded)}>{item.label}</button>
+			<ul className={`${getClassName()}`}>
+				{expanded && item.children && (
+					<>
+						{item.children.map((child) => (
+							<TreeNode key={child.id} item={child} />
+						))}
+					</>
+				)}
+			</ul>
+		</li>
+	)
+}
+
+export default TreeNode
