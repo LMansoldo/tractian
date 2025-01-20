@@ -45,10 +45,14 @@ export interface Item {
 export interface TreeNodeProps {
     id: string;
     label: string;
-    name?: string;
     sensorType?: string;
     status?: string;
-    children?: TreeNodeProps[];
+    isLocation: boolean;
+    isSubLocation: boolean;
+    isAsset: boolean;
+    isSubAsset: boolean;
+    isComponent: boolean;
+    children: TreeNodeProps[];
 }
   
 export interface Filters {

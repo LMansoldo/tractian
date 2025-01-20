@@ -3,19 +3,21 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { fetchCompanyDataThunk } from '../../store/CompanySlice';
 import { fetchTreeItemsThunk } from '../../store/TreeSlice';
+import { Filters, Header, Button } from '../../components';
 import { ReactNode } from 'react';
 
 import type { CompanyState, Company} from '../../types';
 
 const NavigationComponent = ({ data, dispatch }: { data: Company[], dispatch: AppDispatch }) => {
   return data && data.map(({id, name}) => (
-    <button onClick={() => dispatch(fetchTreeItemsThunk(id))}>{name}</button>
+    <Button onClick={() => dispatch(fetchTreeItemsThunk(id))} size="small">{name}</Button>
   ))
 }
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { data, isLoading, error } = useSelector((state: CompanyState) => state.company || {});
+
 
   useEffect(() => {
     const handleFetch = async () => {
@@ -37,12 +39,20 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
 
   if (data) {
     return (
-      <main>
-        <header>
+      <>
+        <Header>
           <NavigationComponent data={data} dispatch={dispatch} />
-        </header>
-        {children}
-      </main>
+        </Header>
+        <main className="m-4 p-4 border solid rounded-md shadow-lg bg-white h-[80vh]">
+          <div className="flex flex-row justify-end items-center p-2">
+            <Filters />
+          </div>
+          <div className="grid grid-cols-[30%_1fr] w-full gap-2">
+            {children}
+          </div>
+        </main>
+      </>
+
     );
   }
 };

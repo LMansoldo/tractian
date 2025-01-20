@@ -5,6 +5,15 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "paths" : {
+      "@components": ["./src/components"],
+      "@context": ["./src/context"],
+      "@assets": ["./src/assets"],
+      "@repositories": ["./src/repositories"],
+      "@store": ["./src/store"],
+      "@types": ["./src/types"],
+      "@views": ["./src/views"],
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

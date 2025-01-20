@@ -19,19 +19,25 @@ const TreeNode: React.FC<{ item: TreeNodeProps }> = ({
 
   if (!matchesFilters()) return null;
 
+  const getClassName = () => {
+    return item.isLocation || item.isSubLocation || item.isAsset || item.isSubAsset || item.isComponent
+      ? "left-9 relative"
+      : "";
+  };
+
   return (
-    <div>
-      <button onClick={() => setExpanded(!expanded)}>
-        {expanded ? "-" : "+"} {item.label}
-      </button>
-      {expanded && item.children && (
-        <div style={{ paddingLeft: "20px" }}>
-          {item.children.map((child) => (
-            <TreeNode key={child.id} item={child} />
-          ))}
-        </div>
-      )}
-    </div>
+    <li className="flex flex-col items-start">
+      <button onClick={() => setExpanded(!expanded)}>{item.label}</button>
+      <ul className={`${getClassName()}`}>
+        {expanded && item.children && (
+          <>
+            {item.children.map((child) => (
+              <TreeNode key={child.id} item={child} />
+            ))}
+          </>
+        )}
+      </ul>
+    </li>
   );
 };
 
