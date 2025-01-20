@@ -53,8 +53,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
 				<Header>
 					<NavigationComponent data={data} dispatch={dispatch} />
 				</Header>
-				<main className="m-4 p-4 border solid rounded-md shadow-lg bg-white h-[80vh]">
-					<div className="flex flex-row justify-end items-center p-2">
+				<main className="border solid rounded-md shadow-lg bg-white p-4 m-4 h-[calc(100vh-100px)]">
+					<div className="flex flex-row justify-end items-center pb-4">
 						<Filters />
 					</div>
 					<div className="grid grid-cols-[30%_1fr] w-full gap-2">

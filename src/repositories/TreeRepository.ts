@@ -1,6 +1,6 @@
 export const fetchTreeItems = async (mainId: string) => {
 	try {
-		const response = await fetch(`http://localhost:3333/${mainId}`)
+		const response = await fetch(`http://localhost:8080/${mainId}`)
 
 		if (!response.ok) throw new Error('Failed to fetch menu items')
 		const data = await response.json()

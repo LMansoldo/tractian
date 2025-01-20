@@ -3,7 +3,7 @@ import React, { createContext, useContext } from 'react'
 import type { Filters } from '@types'
 import type { FilterAction } from '@context'
 
-import { initialFilters } from '@context'
+import { initialFilters } from './initialState'
 
 const FiltersContext = createContext<{
 	filters: Filters
