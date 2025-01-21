@@ -4,78 +4,60 @@ import TreeNode from './TreeNode'
 import type { Item, TreeNodeProps } from '@types'
 
 const ItemTree: React.FC<{ items: Item }> = ({ items }) => {
-	const organizeTree = ({ assets, locations }: Item): TreeNodeProps[] => {
-		const map = new Map<string, TreeNodeProps>()
+  const organizeTree = ({ assets, locations }: Item): TreeNodeProps[] => {
+    const map = new Map<string, TreeNodeProps>();
 
-		locations.forEach((location) => {
-			map.set(location.id, {
-				id: location.id,
-				label: location.name,
-				isLocation: true,
-				isSubLocation: !!location.parentId,
-				isAsset: false,
-				isSubAsset: false,
-				isComponent: false,
-				children: [],
-			})
-		})
+    const createNode = (id: string, label: string, isLocation: boolean, isSubLocation: boolean, isAsset: boolean, isSubAsset: boolean, isComponent: boolean, sensorType?: string, status?: string): TreeNodeProps => ({
+      id,
+      label,
+      isLocation,
+      isSubLocation,
+      isAsset,
+      isSubAsset,
+      isComponent,
+      sensorType,
+      status,
+      children: [],
+    });
 
-		assets.forEach((asset) => {
-			map.set(asset.id, {
-				id: asset.id,
-				label: asset.name,
-				sensorType: asset.sensorType,
-				status: asset.status,
-				isLocation: false,
-				isSubLocation: false,
-				isAsset: !asset.parentId && !!asset.locationId,
-				isSubAsset: !!asset.parentId,
-				isComponent: !!asset.sensorType,
-				children: [],
-			})
-		})
+    locations.forEach((location) => {
+      map.set(location.id, createNode(location.id, location.name, true, !!location.parentId, false, false, false));
+    });
 
-		const result: TreeNodeProps[] = []
+    assets.forEach((asset) => {
+      map.set(asset.id, createNode(asset.id, asset.name, false, false, !asset.parentId && !!asset.locationId, !!asset.parentId, !!asset.sensorType, asset.sensorType, asset.status));
+    });
 
-		locations.forEach((location) => {
-			if (location.parentId) {
-				const parent = map.get(location.parentId)
-				if (parent) {
-					parent.children!.push(map.get(location.id)!)
-				}
-			} else {
-				result.push(map.get(location.id)!)
-			}
-		})
+    const result: TreeNodeProps[] = [];
 
-		assets.forEach((asset) => {
-			if (asset.locationId) {
-				const parent = map.get(asset.locationId)
-				if (parent) {
-					parent.children!.push(map.get(asset.id)!)
-				}
-			} else if (asset.parentId) {
-				const parent = map.get(asset.parentId)
-				if (parent) {
-					parent.children!.push(map.get(asset.id)!)
-				}
-			} else {
-				result.push(map.get(asset.id)!)
-			}
-		})
+    const addToParent = (id: string, parentId: string | null) => {
+      if (parentId) {
+        const parent = map.get(parentId);
+        if (parent) {
+          parent.children!.push(map.get(id)!);
+        }
+      } else {
+        result.push(map.get(id)!);
+      }
+    };
 
-		return result
-	}
+    locations.forEach((location) => addToParent(location.id, location.parentId));
+    assets.forEach((asset) => addToParent(asset.id, asset.locationId || asset.parentId));
 
-	const organizedItems = organizeTree(items)
-	console.log(organizedItems)
-	return (
-		<ul className="pl-4 flex flex-col items-start justify-start relative max-h-full h-full overflow-y-auto">
-			{organizedItems.map((item) => (
-				<TreeNode key={item.id} item={item} />
-			))}
-		</ul>
-	)
-}
+    const hasComponentInChildren = (item: TreeNodeProps): boolean => item.isComponent || (item.children?.some(hasComponentInChildren) ?? false);
 
-export default ItemTree
+    return result.filter(hasComponentInChildren);
+  };
+
+  const organizedItems = organizeTree(items);
+
+  return (
+    <ul className="pl-4 flex w-full flex-col items-start justify-start relative max-h-full h-full overflow-y-auto">
+      {organizedItems.map((item) => (
+        <TreeNode key={item.id} item={item} />
+      ))}
+    </ul>
+  );
+};
+
+export default ItemTree;

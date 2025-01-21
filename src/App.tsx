@@ -1,4 +1,4 @@
-import { MainLayout, TreeView } from '@views'
+import { MainLayout, TreeView, MainView } from '@views'
 import './App.css'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 				<TreeView />
 			</aside>
 			<section className="border solid border-gray-300 p-4 rounded-sm ">
-				a
+				<MainView />
 			</section>
 		</MainLayout>
 	)
