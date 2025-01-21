@@ -59,19 +59,13 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
 			<div className="p-4">
 				<div className="flex flex-col gap-4">
 
-					<Skeleton className="h-6 w-1/3" />
-					<Skeleton className="h-8 w-full" />
-	
-					<div className="flex gap-2">
-						<Skeleton className="h-10 w-20" />
-						<Skeleton className="h-10 w-20" />
-						<Skeleton className="h-10 w-20" />
-					</div>
-	
+					<Skeleton className="h-12 w-full" />	
 
-					<div className="grid grid-cols-[30vw_1fr] gap-2 mt-4">
-						<Skeleton className="h-[300px] w-full" />
-						<Skeleton className="h-[300px] w-full" />
+					<Skeleton className="h-12 w-full" />	
+
+					<div className="border-1 border-solid border-slate-400 p-4 grid grid-cols-[30vw_1fr] gap-2 mt-4">
+						<Skeleton className="h-[70vh] w-full " />
+						<Skeleton className="h-[70vh] w-full" />
 					</div>
 				</div>
 			</div>

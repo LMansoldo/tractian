@@ -1,5 +1,8 @@
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export const fetchTreeItems = async (mainId: string) => {
 	try {
+		await delay(3000); 
 		const response = await fetch(`http://localhost:8080/${mainId}`)
 
 		if (!response.ok) throw new Error('Failed to fetch menu items')
