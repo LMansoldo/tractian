@@ -7,7 +7,7 @@ function App() {
 			<aside className="border solid border-gray-300 rounded-sm h-[calc(100vh-185px)]">
 				<TreeView />
 			</aside>
-			<section className="border solid border-gray-300 p-4 rounded-sm ">
+			<section className="border solid border-gray-300 rounded-sm ">
 				<MainView />
 			</section>
 		</MainLayout>

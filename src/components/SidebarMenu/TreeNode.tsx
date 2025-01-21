@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useFilters } from '@context'
 import { useDispatch } from 'react-redux';
-import { AssetIcon, ComponentIcon, LocationIcon, ChevronDownIcon, EllipseIcon, BoltIcon } from '@assets'
+import { AssetIcon, ComponentIcon, LocationIcon, ChevronDownIcon, EllipseIcon, EllipseGreenIcon, BoltIcon } from '@assets'
 import { setSelectedItem } from '@store';
 
 import type { TreeNodeProps } from '@types'
@@ -98,6 +98,7 @@ const TreeNode: React.FC<{ item: TreeNodeProps }> = ({ item }) => {
           {item.label}
           {item.sensorType === 'energy' && <BoltIcon />}
           {item.status === 'alert' && <EllipseIcon />}
+					{item.status === 'operating' && <EllipseGreenIcon />}
         </div>
       </button>
       {expanded && (
