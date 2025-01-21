@@ -10,4 +10,5 @@ export { default as Logo } from './icons/logo'
 export { default as RouterIcon } from './icons/RouterIcon'
 export { default as SensorIcon } from './icons/SensorIcon'
 export { default as CompanyIcon } from './icons/CompanyIcon'
+export { default as EllipseGreenIcon} from './icons/ellipseGreen'
 
