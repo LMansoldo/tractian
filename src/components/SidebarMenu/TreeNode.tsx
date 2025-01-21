@@ -29,7 +29,7 @@ const TreeNode: React.FC<{ item: TreeNodeProps }> = ({ item }) => {
 		return <ComponentIcon />
 	}
 
-	const ChevronIcon = () => expanded && item.children.length ? <ChevronDownIcon /> : ''
+	const ChevronIcon = () => expanded && item.children.length ? <ChevronDownIcon /> : <div className="w-[10px] " />
 
 	const getClassName = () => {
 		return item.isLocation ||
@@ -42,13 +42,13 @@ const TreeNode: React.FC<{ item: TreeNodeProps }> = ({ item }) => {
 	}
 
 	return (
-		<li className="flex flex-col items-start w-full">
-			<button onClick={() => setExpanded(!expanded)} className="flex gap-2 p-1 items-center">
+		<li className="flex flex-col items-start w-full after:border-l-[1px]  after:border-gray-300 after:solid after:absolute after:left-1 after:h-full">
+			<button onClick={() => setExpanded(!expanded)} className="flex gap-1 p-[2px] items-center hover:bg-blue-600 hover:text-white hover:fill-white">
 				{ChevronIcon()}
 				{getIcon()}
 				{item.label}
 			</button>
-			<ul className={`${getClassName()} overflow-hidden transition-all duration-1000 ease-in-out max-h-0 ${expanded ? 'max-h-screen' : ''} w-full`}>
+			<ul className={`${getClassName()} relative overflow-hidden transition-all duration-1000 ease-in-out max-h-0 ${expanded ? 'max-h-screen' : ''} w-full`}>
 				{expanded && item.children && (
 					<>
 						{item.children.map((child) => (

@@ -18,24 +18,22 @@ const sizeClasses = {
 }
 
 const typeClasses = {
-	primary: 'bg-blue-900 border-blue-800 text-white hover:bg-blue-700',
+	primary: 'bg-blue-900 border-blue-900 text-white hover:bg-blue-700',
 	secondary: 'bg-white border-slate-300 text-slate-700  hover:bg-blue-600 hover:text-white',
 }
 
 const Button: React.FC<ButtonProps> = ({
 	onClick,
 	children,
-	icon,
 	size = 'medium',
 	type = 'primary',
 }) => {
 	return (
 		<button
 			onClick={onClick}
-			className={` rounded-sm ${sizeClasses[size]} ${typeClasses[type]} text-slate flex items-center justify-center border font-semibold`}
+			className={`rounded-sm ${sizeClasses[size]} ${typeClasses[type]} text-slate items-center justify-center border font-semibold flex flex-row gap-2`}
 			aria-label={typeof children === 'string' ? children : undefined}
 		>
-			{icon && <span className="ml-2">{icon}</span>}
 			{children}
 		</button>
 	)

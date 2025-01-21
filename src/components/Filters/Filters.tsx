@@ -1,5 +1,6 @@
 import { useFilters } from '@context'
 import { Button } from '@components'
+import { ExclamationIcon, LightningIcon } from '@assets'
 
 const Filters = () => {
 	const { dispatch } = useFilters()
@@ -15,6 +16,7 @@ const Filters = () => {
 				size="medium"
 				type="secondary"
 			>
+				<ExclamationIcon />
 				Sensor de Energia
 			</Button>
 			<Button
@@ -22,6 +24,7 @@ const Filters = () => {
 				size="medium"
 				type="secondary"
 			>
+				<LightningIcon />
 				Crítico
 			</Button>
 		</div>

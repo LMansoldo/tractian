@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchTreeItemsThunk, fetchCompanyDataThunk, AppDispatch } from '@store'
 import { Filters, Header, Button } from '@components'
 import { ReactNode } from 'react'
+import { CompanyIcon } from '@assets'
 
 import type { CompanyState, Company } from '@types'
 
@@ -16,7 +17,8 @@ const NavigationComponent = ({
 	return (
 		data &&
 		data.map(({ id, name }) => (
-			<Button onClick={() => dispatch(fetchTreeItemsThunk(id))} size="small">
+			<Button onClick={() => dispatch(fetchTreeItemsThunk(id))} size="small" >
+				<CompanyIcon />
 				{name}
 			</Button>
 		))
