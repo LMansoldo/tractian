@@ -1,11 +1,11 @@
 # Asset Management
 
 <video controls width="600">
-  <source src="./Tractian.mov" type="video/mp4">
+  <source src="./Tractian.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-[video](Tractian.mov)
+[video](Tractian.mp4)
 
 ## Future Improvements
 
