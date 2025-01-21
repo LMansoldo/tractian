@@ -55,6 +55,10 @@ export interface TreeNodeProps {
 	children: TreeNodeProps[]
 }
 
+export type SelectionProps = {
+	selectedItem: TreeNodeProps[]
+}
+
 export interface Filters {
 	text?: string
 	energy?: boolean

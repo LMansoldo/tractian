@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useFilters } from '@context'
 import { Button } from '@components'
 import { ExclamationIcon, LightningIcon } from '@assets'
@@ -15,11 +15,6 @@ const Filters = () => {
 		if (isActive || filter) return 'white'
 		return '#2188FF'
 	}
-
-	useEffect(() => {
-		console.log(filters.energy)
-
-	} ,[filters])
 
 	return (
 		<div className="flex flex-row gap-2 items-center">

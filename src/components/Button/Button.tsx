@@ -22,13 +22,14 @@ const sizeClasses = {
 
 const typeClasses = {
 	primary: 'bg-blue-900 border-blue-900 text-white hover:bg-blue-700',
-	secondary: 'bg-white border-slate-300 text-slate-700 hover:bg-blue-600 hover:text-white',
+	secondary: 'border-slate-300 text-slate-700 hover:bg-blue-600 hover:text-white',
 }
 
 const setSelectedStatus = (selected: boolean | undefined, type: 'primary' | 'secondary') => {
 	if (selected && type === 'primary') return 'bg-blue-700'
 	if (selected && type === 'secondary') return 'bg-blue-600 text-white'
 }
+
 
 const Button: React.FC<ButtonProps> = ({
 	onClick,
@@ -39,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
 	size = 'medium',
 	type = 'primary',
 }) => {
+
 	return (
 		<button
 			onClick={onClick}

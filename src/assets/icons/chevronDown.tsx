@@ -5,6 +5,7 @@ const ChevronDownIcon = () => (
     height="10"
     fill="none"
     viewBox="0 0 10 10"
+    className="w-2 h-2 flex-shrink-0 basis-auto"
   >
     <path
       fill="#17192D"

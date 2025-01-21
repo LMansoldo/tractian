@@ -2,10 +2,11 @@ const AssetIcon = ({ color = '#2188FF' }: { color?: string }) => {
 	return (
 		<svg
     xmlns="http://www.w3.org/2000/svg"
-    width="22"
-    height="22"
-    fill="none"
+    width="18"
+    height="18"
+    className="w-4 h-4 flex-shrink-0 basis-auto"
     viewBox="0 0 22 22"
+    fill="none"
   >
     <path
       fill={color}

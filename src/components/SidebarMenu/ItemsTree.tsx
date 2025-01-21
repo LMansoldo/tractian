@@ -52,7 +52,7 @@ const ItemTree: React.FC<{ items: Item }> = ({ items }) => {
   const organizedItems = organizeTree(items);
 
   return (
-    <ul className="pl-4 flex w-full flex-col items-start justify-start relative max-h-full h-full overflow-y-auto">
+    <ul className="flex flex-col w-auto items-start justify-start relative max-h-full h-full overflow-y-auto text-base">
       {organizedItems.map((item) => (
         <TreeNode key={item.id} item={item} />
       ))}
