@@ -5,7 +5,7 @@
   Your browser does not support the video tag.
 </video>
 
-[video](Tractian.mp4)
+[video](Tractian.mov)
 
 ## Future Improvements
 
