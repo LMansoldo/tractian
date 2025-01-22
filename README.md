@@ -7,6 +7,14 @@
 
 [video](Tractian.mov)
 
+## Instructions
+
+To start the server
+`npm run server`
+
+And the project
+`npm run build && npm run preview`
+
 ## Future Improvements
 
 - Search with autocomplete input
